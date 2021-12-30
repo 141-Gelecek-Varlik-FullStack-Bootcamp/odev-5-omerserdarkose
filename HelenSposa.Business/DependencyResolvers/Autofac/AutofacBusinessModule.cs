@@ -21,7 +21,7 @@ namespace HelenSposa.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<HelenSposaDbContext>().As<DbContext>();
+            //builder.RegisterType<HelenSposaDbContext>().As<DbContext>();
 
             builder.RegisterType<CustomerManager>().As<ICustomerService>();
             builder.RegisterType<EfCustomerDal>().As<ICustomerDal>();

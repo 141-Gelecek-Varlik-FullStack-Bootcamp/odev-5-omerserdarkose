@@ -8,6 +8,7 @@
 - Bootcamp suresinde ogrenilen her yeni yontem ve teknoloji sonrasinda ilaveler ve refactoring islemleri ile surekli olarak gelisim
 
 ### Kazanimlar
+- DistributedCaching with **Redis**
 - **Interceptor** kullanimi
 - **Cross Cutting Concern** ve **Aspect Oriented Programming**
 - **JWT** kutuphanesine ait kullanim ornekleri

@@ -1,5 +1,6 @@
 ﻿using HelenSposa.Core.CrossCuttingConcerns.Caching;
 using HelenSposa.Core.CrossCuttingConcerns.Caching.Microsoft;
+using HelenSposa.Core.CrossCuttingConcerns.Caching.Redis;
 using HelenSposa.Core.Utilities.IoC;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,9 @@ namespace HelenSposa.Core.DependecyResolver
             services.AddMemoryCache();
             services.AddSingleton<ICacheManager, MemoryCacheManager>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddDistributedRedisCache(options => {
+                options.Configuration = "127.0.0.1:6379";
+           });
         }
     }
 }

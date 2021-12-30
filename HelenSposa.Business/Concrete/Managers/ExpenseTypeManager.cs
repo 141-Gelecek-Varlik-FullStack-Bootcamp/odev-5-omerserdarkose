@@ -29,7 +29,7 @@ namespace HelenSposa.Business.Concrete.Managers
 
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(ExpenseTypeAddValidator))]
-        [CacheRemoveAscpect("IExpenseTypeService.Get")]
+        //[CacheRemoveAscpect("IExpenseTypeService.Get")]
         public IResult Add(ExpenseTypeAddDto addedExpenseType)
         {
             var mapExpenseType = _mapper.Map<ExpenseType>(addedExpenseType);
@@ -38,7 +38,7 @@ namespace HelenSposa.Business.Concrete.Managers
         }
 
         [SecuredOperation("admin")]
-        [CacheRemoveAscpect("IExpenseTypeService.Get")]
+        //[CacheRemoveAscpect("IExpenseTypeService.Get")]
         public IResult Delete(int id)
         {
             _expenseTypeDal.Delete(new ExpenseType { Id=id});
@@ -56,7 +56,7 @@ namespace HelenSposa.Business.Concrete.Managers
 
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(ExpenseTypeUpdateValidator))]
-        [CacheRemoveAscpect("IExpenseTypeService.Get")]
+        //[CacheRemoveAscpect("IExpenseTypeService.Get")]
         public IResult Update(ExpenseTypeUpdateDto updatedExpenseType)
         {
             var mapExpenseType = _mapper.Map<ExpenseType>(updatedExpenseType);

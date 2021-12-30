@@ -30,7 +30,7 @@ namespace HelenSposa.Business.Concrete.Managers
         }
 
         [SecuredOperation(roles:"admin")]
-        [CacheRemoveAscpect("IUserService.Get")]
+        //[CacheRemoveAscpect("IUserService.Get")]
         public IResult Delete(int id)
         {
             _userDal.Delete(new User { Id=id});

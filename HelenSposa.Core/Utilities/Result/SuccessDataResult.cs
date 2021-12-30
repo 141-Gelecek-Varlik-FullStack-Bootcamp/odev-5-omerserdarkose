@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace HelenSposa.Core.Utilities.Result
 {
     public class SuccessDataResult<T>:DataResult<T>
     {
+        [JsonConstructor]
         public SuccessDataResult(T data, string message) : base(data, true, message)
         {
         }
