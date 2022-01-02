@@ -19,6 +19,8 @@ namespace HelenSposa.Business.Abstract
 
         User GetByMail(string eMail);
 
+        User GetById(int userId);
+
         IResult Delete(int id);
 
         //IResult SetClaims (User user, List<OperationClaim> operationClaims);

@@ -26,7 +26,7 @@ namespace HelenSposa.Business.Concrete.Managers
             _mapper = mapper;
         }
 
-        //[CacheRemoveAscpect("IExpenseService.Get")]
+        [CacheRemoveAscpect("IExpenseService.Get")]
         public IResult Add(ExpenseAddDto addedExpense)
         {
             var mapExpense = _mapper.Map<Expense>(addedExpense);
@@ -41,7 +41,7 @@ namespace HelenSposa.Business.Concrete.Managers
         }
 
         [CacheAspect(duration:5,Priority =2)]
-        //[SecuredOperation("admin",Priority =1)]
+        [SecuredOperation("admin",Priority =1)]
         public IDataResult<List<ExpenseShowDto>> GetAll()
         {
             var expenseList = _expenseDal.GetList();

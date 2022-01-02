@@ -30,7 +30,7 @@ namespace HelenSposa.Business.Concrete.Managers
         }
 
         [SecuredOperation(roles:"admin")]
-        //[CacheRemoveAscpect("IUserService.Get")]
+        [CacheRemoveAscpect("IUserService.Get")]
         public IResult Delete(int id)
         {
             _userDal.Delete(new User { Id=id});
@@ -41,6 +41,13 @@ namespace HelenSposa.Business.Concrete.Managers
         public User GetByMail(string eMail)
         {
             var user=_userDal.Get(u => u.Email == eMail);
+            return user;
+        }
+
+        [CacheAspect(duration: 5)]
+        public User GetById(int userId)
+        {
+            var user = _userDal.Get(u => u.Id == userId);
             return user;
         }
 

@@ -25,6 +25,8 @@ using HelenSposa.Core.Utilities.Security.Encyption;
 using HelenSposa.Core.Extensions;
 using HelenSposa.Core.Utilities.IoC;
 using HelenSposa.Core.DependecyResolver;
+using Hangfire;
+using HelenSposa.Entities.Dtos.Mail;
 
 namespace HelenSposa.WebApi
 {
@@ -45,6 +47,7 @@ namespace HelenSposa.WebApi
             services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddDependencyResolvers(new ICoreModule[] { new CoreModule()});
+            services.AddScoped<IMailService, MailManager>();
             services.AddCors(option =>
             {
                 option.AddPolicy("AllowOrigin", builder => builder.WithOrigins("http://localhost:44323"));
@@ -66,6 +69,10 @@ namespace HelenSposa.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HelenSposa.WebApi", Version = "v1" });
             });
+
+            services.AddHangfire(config => config.UseSqlServerStorage(Configuration.GetConnectionString("HangfireDBContext")));
+
+            services.Configure<SmtpConfigDto>(Configuration.GetSection("SmtpConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +87,10 @@ namespace HelenSposa.WebApi
             app.UseCors(builder => builder.WithOrigins("http://localhost:44323").AllowAnyHeader());
 
             app.UseHttpsRedirection();
+
+            app.UseHangfireDashboard("/hangfire");
+
+            app.UseHangfireServer();
 
             app.UseRouting();
 

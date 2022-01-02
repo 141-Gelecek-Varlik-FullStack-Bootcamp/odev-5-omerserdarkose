@@ -1,4 +1,5 @@
-﻿using HelenSposa.Business.Abstract;
+﻿using HelenSposa.BackgroundJob;
+using HelenSposa.Business.Abstract;
 using HelenSposa.Entities.Dtos.User;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -58,6 +59,9 @@ namespace HelenSposa.WebApi.Controllers
             {
                 return BadRequest(tokenResult.Message);
             }
+
+            //register olan kullanici icin mail gonderme islemine kayit yapiliyor
+            DelayedJobs.SendMailWelcomeJobs(userToRegister.Data.Id);
 
             return Ok(tokenResult.Data);
         }

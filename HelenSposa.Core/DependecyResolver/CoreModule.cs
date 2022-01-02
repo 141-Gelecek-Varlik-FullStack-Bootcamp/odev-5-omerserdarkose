@@ -21,8 +21,15 @@ namespace HelenSposa.Core.DependecyResolver
         public void Load(IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.AddSingleton<ICacheManager, MemoryCacheManager>();
+
+            //kullanilacak cache teknolojisi belirtiliyor
+            //halihazirda Redis ile distributed cache ve Microsoftun sundugu InMemory cache implemente edilmis durumda.
+            //asagida yazan 'RedisCacheManager' ifadesi yerine 'MemoryCacheManager' yazildigi anda tum sistem inmemory olarak calismaya baslayacak durumda
+            services.AddSingleton<ICacheManager, RedisCacheManager>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //redis serverin calistigi IP ve port numarasi tanimlaniyor
             services.AddDistributedRedisCache(options => {
                 options.Configuration = "127.0.0.1:6379";
            });

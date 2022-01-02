@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelenSposa.BackgroundJob", "HelenSposa.BackgroundJob\HelenSposa.BackgroundJob.csproj", "{6536F452-27FB-4B6F-AFBF-87B89BCB9A74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{703DCFD7-A290-418A-8552-97FBC9D73BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{703DCFD7-A290-418A-8552-97FBC9D73BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{703DCFD7-A290-418A-8552-97FBC9D73BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6536F452-27FB-4B6F-AFBF-87B89BCB9A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6536F452-27FB-4B6F-AFBF-87B89BCB9A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6536F452-27FB-4B6F-AFBF-87B89BCB9A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6536F452-27FB-4B6F-AFBF-87B89BCB9A74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HelenSposa.Core.Utilities.Result
@@ -12,6 +13,7 @@ namespace HelenSposa.Core.Utilities.Result
     /// </summary>
     public class Result : IResult
     {
+        [JsonConstructor]
         public Result(bool success, string message):this (success)
         {
             Message = message;
