@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HelenSposa.Entities.Dtos.OperationClaim
+namespace HelenSposa.Entities.Dtos.Claim
 {
     public class ClaimShowDto:IDto
     {

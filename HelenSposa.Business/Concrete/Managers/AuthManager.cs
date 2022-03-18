@@ -31,7 +31,7 @@ namespace HelenSposa.Business.Concrete.Managers
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
-            var claims = _userManager.GetClaims(user);
+            var claims = _userManager.GetUserClaims(user.Id);
             var accessToken = _tokenHelper.CreateToken(user, _mapper.Map<List<Claim>>(claims.Data));
 
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
@@ -53,35 +53,6 @@ namespace HelenSposa.Business.Concrete.Managers
             }
 
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
-        }
-
-        //[ValidationAspect(typeof(UserRegisterValidator))]
-        public IDataResult<User> Register(UserRegisterDto userRegisterDto)
-        {
-            byte[] passwordHash, passwordSalt;
-
-            HashingHelper.CreatePasswordHash(userRegisterDto.Password, out passwordHash, out passwordSalt);
-
-            var newUser = _mapper.Map<User>(userRegisterDto);
-            newUser.PasswordHash = passwordHash;
-            newUser.PasswordSalt = passwordSalt;
-            newUser.IsActive = true;
-            newUser.Idate=DateTime.Now;
-
-            _userManager.Add(newUser);
-
-            return new SuccessDataResult<User>(newUser, Messages.UserRegistered);
-        }
-
-        [CacheAspect(duration: 5)]
-        public IResult UserNotExists(string email)
-        {
-            if (_userManager.GetByMail(email)!=null)
-            {
-                return new ErrorResult(Messages.UserAlreadyExist);
-            }
-
-            return new SuccessResult();
         }
     }
 }

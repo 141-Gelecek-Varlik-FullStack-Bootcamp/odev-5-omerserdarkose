@@ -35,6 +35,7 @@ namespace HelenSposa.Business.DependencyResolvers.Autofac
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
             builder.RegisterType<AuthManager>().As<IAuthService>();
+            
 
             //yurutulmekte olan assemblyi aliyoruz
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

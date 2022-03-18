@@ -3,20 +3,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelenSposa.Business.Abstract;
+using HelenSposa.Entities.Dtos.User;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HelenSposa.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
+        private IUserService _userManager;
+
+        public UserController(IUserService userService)
+        {
+            _userManager = userService;
+        }
+
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var result = _userManager.GetAll();
+            return Ok(result.Data);
         }
 
         // GET api/<UserController>/5
@@ -28,8 +37,18 @@ namespace HelenSposa.WebApi.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Add([FromBody] UserAddDto userAddDto)
         {
+            var userNotExists = _userManager.UserNotExists(userAddDto.Email);
+
+            if (!userNotExists.Success)
+            {
+                return BadRequest(userNotExists.Message);
+            }
+
+            var newUser = _userManager.Add(userAddDto);
+
+            return Ok(newUser.Message);
         }
 
         // PUT api/<UserController>/5

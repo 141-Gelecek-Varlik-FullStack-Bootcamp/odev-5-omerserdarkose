@@ -23,7 +23,7 @@ namespace HelenSposa.WebApi.Controllers
 
 
         [HttpPost("login")]
-        public ActionResult Login([FromBody] UserLoginDto userLoginDto)
+        public IActionResult Login([FromBody] UserLoginDto userLoginDto)
         {
             var userToLogin = _authManager.Login(userLoginDto);
             if (!userToLogin.Success)
@@ -39,28 +39,5 @@ namespace HelenSposa.WebApi.Controllers
 
             return Ok(tokenResult.Data);
         }
-
-        [HttpPost("register")]
-        public ActionResult Register([FromBody] UserRegisterDto userRegisterDto)
-        {
-            var userNotExists = _authManager.UserNotExists(userRegisterDto.Email);
-
-            if (!userNotExists.Success)
-            {
-                return BadRequest(userNotExists.Message);
-            }
-
-            var userToRegister = _authManager.Register(userRegisterDto);
-
-            var tokenResult = _authManager.CreateAccessToken(userToRegister.Data);
-
-            if (!tokenResult.Success)
-            {
-                return BadRequest(tokenResult.Message);
-            }
-
-            return Ok(tokenResult.Data);
-        }
-
     }
 }
